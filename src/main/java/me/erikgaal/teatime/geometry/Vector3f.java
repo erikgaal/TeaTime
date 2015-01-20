@@ -4,35 +4,35 @@ package me.erikgaal.teatime.geometry;
 /**
  * The class Vector3d holds a 3-tuple double and implements common algebraic operations.
  */
-public class Vector3d {
-    public double x, y, z;
+public class Vector3f {
+    public float x, y, z;
 
-    public Vector3d() {
+    public Vector3f() {
     }
 
-    public Vector3d(double x, double y, double z) {
+    public Vector3f(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public void set(double x, double y, double z) {
+    public void set(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public void set(Vector3d v) {
+    public void set(Vector3f v) {
         set(v.x, v.y, v.z);
     }
 
-    public void translate(double x, double y, double z) {
+    public void translate(float x, float y, float z) {
         this.x += x;
         this.y += y;
         this.z += z;
     }
 
-    public void translate(Vector3d v) {
+    public void translate(Vector3f v) {
         translate(v.x, v.y, v.z);
     }
 
@@ -42,8 +42,8 @@ public class Vector3d {
      * @param b the second component
      * @return the vector A + B
      */
-    public static Vector3d add(Vector3d a, Vector3d b) {
-        return new Vector3d(
+    public static Vector3f add(Vector3f a, Vector3f b) {
+        return new Vector3f(
                 a.x + b.x,
                 a.y + b.y,
                 a.z + b.z);
@@ -55,8 +55,8 @@ public class Vector3d {
      * @param b the second component
      * @return the vector A - B
      */
-    public static Vector3d subtract(Vector3d a, Vector3d b) {
-        return new Vector3d(
+    public static Vector3f subtract(Vector3f a, Vector3f b) {
+        return new Vector3f(
                 a.x - b.x,
                 a.y - b.y,
                 a.z - b.z);
@@ -68,8 +68,8 @@ public class Vector3d {
      * @param b the second component
      * @return the vector A . B
      */
-    public static Vector3d dot(Vector3d a, Vector3d b) {
-        return new Vector3d(
+    public static Vector3f dot(Vector3f a, Vector3f b) {
+        return new Vector3f(
                 a.x * b.x,
                 a.y * b.y,
                 a.z * b.z);
@@ -81,17 +81,17 @@ public class Vector3d {
      * @param b the second component
      * @return the vector A * B
      */
-    public static Vector3d cross(Vector3d a, Vector3d b) {
-        return new Vector3d(
+    public static Vector3f cross(Vector3f a, Vector3f b) {
+        return new Vector3f(
                 a.y * b.z - a.z * b.y,
                 a.z * b.x - a.x * b.z,
                 a.x * b.y - a.y * b.x);
     }
 
     /**
-     * Returns a text representation of the <code>Vector3d</code>.
+     * Returns a text representation of the <code>Vector3f</code>.
      */
     public String toString() {
-        return "Vector3d[" + x + ", " + y + ", " + z + "]";
+        return "Vector3f[" + x + ", " + y + ", " + z + "]";
     }
 }
