@@ -39,13 +39,16 @@ public class TeaTimeServer implements Runnable {
 
                 if (key.equals("--help")) {
                     Logger.println("Usage: java teatime.server.TeaTimeServer [OPTION]...\n" +
+                            "Options:\n" +
                             "\t--port\t\tlocal port number");
+                    System.exit(0);
                 } else if (key.equals("--port") && value != null) {
                     try {
                         port = Integer.parseInt(value);
                     } catch (NumberFormatException e) {
                         throw new IllegalArgumentException("Invalid value " + value + " for key " + key);
                     }
+                    ++i;
                 } else {
                     throw new IllegalArgumentException(key);
                 }
@@ -53,6 +56,7 @@ public class TeaTimeServer implements Runnable {
         } catch (IllegalArgumentException e) {
             Logger.error("Unknown option: " + e.getMessage());
             Logger.println("Usage: java teatime.server.TeaTimeServer [OPTION]...\n" +
+                    "Options:\n" +
                     "\t--port\t\tlocal port number");
             System.exit(1);
         }
