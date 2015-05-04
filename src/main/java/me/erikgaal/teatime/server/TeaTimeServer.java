@@ -1,6 +1,7 @@
 package me.erikgaal.teatime.server;
 
-import me.erikgaal.teatime.util.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -15,6 +16,8 @@ public class TeaTimeServer implements Runnable {
             "\t-?, --help\t\t\t\tshow this message\n";
 
     public static final int DEFAULT_PORT = 8844;
+
+    private static final Logger logger = LogManager.getLogger();
 
     private int serverPort;
 
@@ -33,9 +36,9 @@ public class TeaTimeServer implements Runnable {
 
         while (running) {
             try {
-                Logger.debug("Waiting for a client...");
+                logger.debug("Waiting for a client...");
                 Socket socket = server.accept();
-                Logger.debug("Client connected!");
+                logger.debug("Client connected!");
                 clients.add(new ClientHandler(socket));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -47,10 +50,10 @@ public class TeaTimeServer implements Runnable {
     private void init() {
         try {
             server = new ServerSocket(serverPort);
-            Logger.info(String.format("Starting server on port %s", serverPort));
+            logger.info(String.format("Starting server on port %s", serverPort));
         } catch (IOException e) {
-            Logger.fatal(String.format("Unable to start server on port %s", serverPort));
-            Logger.fatal(e.getMessage());
+            logger.fatal(String.format("Unable to start server on port %s", serverPort));
+            logger.fatal(e.getMessage());
             System.exit(1);
         }
     }
@@ -69,8 +72,9 @@ public class TeaTimeServer implements Runnable {
 
                 if (key.startsWith("--")) {
                     switch (key) {
+                        case "-?":
                         case "--help":
-                            Logger.println(USAGE_STRING);
+                            logger.info(USAGE_STRING);
                             System.exit(0);
                             break;
                         case "-p":
@@ -95,8 +99,8 @@ public class TeaTimeServer implements Runnable {
                 }
             }
         } catch (IllegalArgumentException e) {
-            Logger.error(e.getMessage());
-            Logger.println(USAGE_STRING);
+            logger.error(e.getMessage());
+            logger.info(USAGE_STRING);
             System.exit(1);
         }
 

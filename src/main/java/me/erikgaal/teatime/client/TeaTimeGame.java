@@ -1,8 +1,7 @@
 package me.erikgaal.teatime.client;
 
-import me.erikgaal.teatime.util.Logger;
-
-import java.io.IOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TeaTimeGame implements Runnable {
 
@@ -13,6 +12,8 @@ public class TeaTimeGame implements Runnable {
 
     public static final String DEFAULT_HOST = "xenon.student.utwente.nl";
     public static final int DEFAULT_PORT = 8844;
+
+    private static final Logger logger = LogManager.getLogger();
 
     private String serverHost;
     private int serverPort;
@@ -45,7 +46,7 @@ public class TeaTimeGame implements Runnable {
                 if (key.startsWith("--")) {
                     switch (key) {
                         case "--help":
-                            Logger.println(USAGE_STRING);
+                            logger.info(USAGE_STRING);
                             System.exit(0);
                             break;
                         case "-h":
@@ -79,8 +80,8 @@ public class TeaTimeGame implements Runnable {
                 }
             }
         } catch (IllegalArgumentException e) {
-            Logger.error(e.getMessage());
-            Logger.println(USAGE_STRING);
+            logger.error(e.getMessage());
+            logger.info(USAGE_STRING);
             System.exit(1);
         }
 
